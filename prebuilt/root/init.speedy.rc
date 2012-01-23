@@ -15,6 +15,11 @@ on fs
     mount ext4 /dev/block/mmcblk0p28 /cache wait noatime nosuid nodev data=ordered noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p31 /devlog wait noatime nosuid nodev data=ordered noauto_da_alloc
 
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    # for backwards compatibility
+    symlink /mnt/sdcard /sdcard
+
     #wifi
     mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
