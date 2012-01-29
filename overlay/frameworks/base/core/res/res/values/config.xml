@@ -192,7 +192,4 @@
     If false, Content-disposition fragments are ignored -->
     <bool name="config_mms_content_disposition_support">false</bool>
 
-    <!-- Use legacy usb -->
-    <bool name="config_usesLegacyUsbDeviceManager">true</bool>
-
 </resources>

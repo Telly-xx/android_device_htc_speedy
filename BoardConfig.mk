@@ -25,6 +25,14 @@
 # against the traditional rules of inheritance).
 USE_CAMERA_STUB := true
 
+# Additional Camera hacks for speedy
+TARGET_LEGACY_CAMERA := true
+TARGET_CAMERA_WRAPPER := 7x30
+
+PRODUCT_COPY_FILES += \
+    vendor/htc/speedy/proprietary/libcamera.so:obj/lib/libcamera.so \
+    vendor/htc/speedy/proprietary/libcamera.so:/system/lib/libcamera.so
+
 # inherit from the proprietary version
 -include vendor/htc/speedy/BoardConfigVendor.mk
 
@@ -37,6 +45,9 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
+
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
 TARGET_SPECIFIC_HEADER_PATH := device/htc/speedy/include
 
@@ -51,10 +62,10 @@ WIFI_DRIVER_FW_PATH_AP           := "/vendor/firmware/fw_bcm4329_apsta.bin"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/proc/calibration"
 WIFI_DRIVER_MODULE_NAME          := "bcm4329"
 
-BOARD_USE_LEGACY_TOUCHSCREEN := true
+#BOARD_USE_LEGACY_TOUCHSCREEN := true
 
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_PREBUILT_LIBAUDIO := true
+#BOARD_USES_GENERIC_AUDIO := false
+#BOARD_PREBUILT_LIBAUDIO := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -67,22 +78,29 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1
 BOARD_KERNEL_BASE := 0x4000000
 BOARD_KERNEL_PAGE_SIZE := 4096
 
+BOARD_EGL_CFG := device/htc/speedy/prebuilt/system/lib/egl/egl.cfg
+BOARD_USES_ADRENO_200 := true
+ARCH_ARM_HAVE_VFP := true
+USE_OPENGL_RENDERER := true
+TARGET_FORCE_CPU_UPLOAD := true
+TARGET_USES_C2D_COMPOSITION := true
+TARGET_USES_OVERLAY := true
+TARGET_USES_GENLOCK := true
+TARGET_USES_SF_BYPASS := true
+TARGET_HAVE_BYPASS := true
+TARGET_GRALLOC_USES_ASHMEM := true
+
+TARGET_QCOM_HDMI_OUT := true
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
+BOARD_USES_QCOM_LIBRPC := true
+BOARD_USES_QCOM_GPS := true
+BOARD_USE_QCOM_PMEM := true
 
-BOARD_EGL_CFG := device/htc/speedy/prebuilt/system/lib/egl/egl.cfg
-BOARD_USES_OVERLAY := true
-#USE_OPENGL_RENDERER := true
-#BOARD_USES_HGL := true
-
-COMMON_GLOBAL_CFLAGS += \
-    -DMISSING_EGL_EXTERNAL_IMAGE \
-    -DMISSING_EGL_PIXEL_FORMAT_YV12 \
-    -DMISSING_GRALLOC_BUFFERS
+COMMON_GLOBAL_CFLAGS += -DREFRESH_RATE=60 -DQCOM_HARDWARE
 
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := speedy
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
-BOARD_USES_QCOM_LIBRPC := true
 
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun0/file
 
@@ -113,4 +131,3 @@ BOARD_SDCARD_DEVICE_SECONDARY := /dev/block/mmcblk1
 BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_SELECT_BUTTON := 1
-BOARD_USES_RECOVERY_CHARGEMODE := true

@@ -14,10 +14,8 @@
 # limitations under the License.
 #
 
-
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
-
 
 # The gps config appropriate for this device
 PRODUCT_COPY_FILES += \
@@ -50,19 +48,49 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
+# CameraHal
 PRODUCT_PACKAGES += \
+    camera.msm7x30 \
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio.a2dp.default \
+    audio_policy.msm7x30 \
+    audio.primary.msm7x30 \
+    libaudioutils \
+    libtinyalsa
+
+# Video
+PRODUCT_PACKAGES += \
+    copybit.msm7x30 \
+    gralloc.msm7x30 \
+    overlay.msm7x30 \
+    hwcomposer.msm7x30
+
+# Qcom
+PRODUCT_PACKAGES += \
+    libgenlock \
+    libmemalloc \
+    liboverlay \
+    libQcomUI
+
+# Omx
+PRODUCT_PACKAGES += \
+    libOmxCore \
+    libOmxVenc \
+    libOmxVdec
+
+# Misc
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory \
+    librs_jni \
     gps.speedy \
     sensors.speedy \
-    lights.speedy \
-    librs_jni \
-    audio.a2dp.default \
-    audio.primary.msm7x30 \
-    audio_policy.msm7x30 \
-    gralloc.msm7x30 \
-    overlay.default \
-    libOmxCore \
-    libOmxVidEnc \
-    com.android.future.usb.accessory
+    lights.speedy
+
+# Temporary hack
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    persist.service.adb.enable=1
 
 # Input config files
 PRODUCT_COPY_FILES += \
@@ -70,7 +98,6 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/usr/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl \
     device/htc/speedy/prebuilt/system/usr/idc//speedy-keypad.idc:system/usr/idc/speedy-keypad.idc \
     device/htc/speedy/prebuilt/system/usr/keylayout/speedy-keypad.kl:system/usr/keylayout/speedy-keypad.kl
-
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -118,6 +145,16 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
+# OMX Config Profiles
+PRODUCT_COPY_FILES += \
+    device/htc/speedy/prebuilt/system/etc/vomeComp_RTSP.cfg:system/etc/vomeComp_RTSP.cfg \
+    device/htc/speedy/prebuilt/system/etc/vomeComp.cfg:system/etc/vomeComp.cfg \
+    device/htc/speedy/prebuilt/system/etc/vomeCore.cfg:system/etc/vomeCore.cfg \
+    device/htc/speedy/prebuilt/system/etc/vomeplay.cfg:system/etc/vomeplay.cfg \
+    device/htc/speedy/prebuilt/system/etc/vommcodec.cfg:system/etc/vommcodec.cfg \
+    device/htc/speedy/prebuilt/system/etc/voPDLog.cfg:system/etc/voPDLog.cfg \
+    device/htc/speedy/prebuilt/system/etc/voVidDec.dat:system/etc/voVidDec.dat
+
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
@@ -152,10 +189,6 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/lib/modules/wimaxdbg.ko:system/lib/modules/wimaxdbg.ko \
     device/htc/speedy/prebuilt/system/lib/modules/wimaxuart.ko:system/lib/modules/wimaxuart.ko
 
-#Disable HWAccel for now
-ADDITIONAL_BUILD_PROPERTIES += \
-    ro.config.disable_hw_accel=true
-
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/lib/libcryp98.so:system/lib/libcryp98.so
 
@@ -171,7 +204,6 @@ $(call inherit-product, device/htc/speedy/media_htcaudio.mk)
 $(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
 
 PRODUCT_NAME := htc_speedy
 PRODUCT_DEVICE := speedy

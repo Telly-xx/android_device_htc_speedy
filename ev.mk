@@ -15,8 +15,8 @@ PRODUCT_MANUFACTURER := HTC
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_ID=GRI40 PRODUCT_NAME=htc_speedy BUILD_FINGERPRINT=sprint/htc_speedy/speedy:2.3.3/GRI40/74499:user/release-keys PRIVATE_BUILD_DESC="2.76.651.4 CL74499 release-keys"
 
 # Set up the product codename, build version & MOTD.
-PRODUCT_CODENAME = Artis
-PRODUCT_VERSION_DEVICE_SPECIFIC := p3
+PRODUCT_CODENAME := Artis
+PRODUCT_VERSION_DEVICE_SPECIFIC := p4
 
 PRODUCT_MOTD :="\n\n\n--------------------MESSAGE---------------------\nThank you for choosing Evervolv for your Evo Shift 4G\nPlease visit us at \#evervolv on irc.freenode.net\nFollow @preludedrew for the latest Evervolv updates\nGet the latest rom at evervolv.com\n------------------------------------------------\n"
 
@@ -29,4 +29,3 @@ PRODUCT_COPY_FILES +=  \
 
 # USB
 ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mass_storage
-#ADDITIONAL_DEFAULT_PROPERTIES += persist.sys.usb.config=mtp,adb
