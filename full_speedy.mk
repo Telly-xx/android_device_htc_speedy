@@ -14,8 +14,8 @@
 # limitations under the License.
 #
 
-PRODUCT_AAPT_CONFIG := normal hdpi
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+# common msm7x30 configs
+$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 
 # The gps config appropriate for this device
 PRODUCT_COPY_FILES += \
@@ -25,7 +25,6 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/root/init.speedy.rc:root/init.speedy.rc \
-    device/htc/speedy/prebuilt/root/init.speedy.usb.rc:root/init.speedy.usb.rc \
     device/htc/speedy/prebuilt/root/ueventd.speedy.rc:root/ueventd.speedy.rc
 
 ## (2) Also get non-open-source GSM-specific aspects if available
@@ -38,52 +37,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.cdma.home.operator.numeric=310120 \
 	ro.cdma.home.operator.alpha=Sprint \
 	ro.setupwizard.enable_bypass=1 \
-        dalvik.vm.lockprof.threshold=500 \
-        dalvik.vm.dexopt-flags=m=y
+    dalvik.vm.lockprof.threshold=500 \
+    dalvik.vm.dexopt-flags=m=y
 
 DEVICE_PACKAGE_OVERLAYS += device/htc/speedy/overlay
 
 PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
 # CameraHal
-PRODUCT_PACKAGES += \
-    camera.msm7x30 \
-
-# Audio
-PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio_policy.msm7x30 \
-    audio.primary.msm7x30 \
-    libaudioutils \
-    libtinyalsa
-
-# Video
-PRODUCT_PACKAGES += \
-    copybit.msm7x30 \
-    gralloc.msm7x30 \
-    overlay.msm7x30 \
-    hwcomposer.msm7x30
-
-# Qcom
-PRODUCT_PACKAGES += \
-    libgenlock \
-    libmemalloc \
-    liboverlay \
-    libQcomUI
-
-# Omx
-PRODUCT_PACKAGES += \
-    libOmxCore \
-    libOmxVenc \
-    libOmxVdec
+#PRODUCT_PACKAGES += \
+#    camera.msm7x30
 
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory \
-    librs_jni \
     gps.speedy \
     sensors.speedy \
     lights.speedy
@@ -117,33 +84,6 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/vendor/firmware/default_org.acdb:system/etc/firmware/default_org.acdb \
     device/htc/speedy/prebuilt/vendor/firmware/fw_bcm4329.bin:system/vendor/firmware/fw_bcm4329.bin \
     device/htc/speedy/prebuilt/vendor/firmware/fw_bcm4329_apsta.bin:system/vendor/firmware/fw_bcm4329_apsta.bin \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_command_control.fw:system/etc/firmware/vidc_720p_command_control.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_h263_dec_mc.fw:system/etc/firmware/vidc_720p_h263_dec_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_h264_dec_mc.fw:system/etc/firmware/vidc_720p_h264_dec_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_h264_enc_mc.fw:system/etc/firmware/vidc_720p_h264_enc_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_mp2_dec_mc.fw:system/etc/firmware/vidc_720p_mp2_dec_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_mp4_dec_mc.fw:system/etc/firmware/vidc_720p_mp4_dec_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_mp4_enc_mc.fw:system/etc/firmware/vidc_720p_mp4_enc_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/vidc_720p_vc1_dec_mc.fw:system/etc/firmware/vidc_720p_vc1_dec_mc.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
-    device/htc/speedy/prebuilt/vendor/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw 
-
-
-# Permissions
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.distinct.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml \
-    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
-
-# media config xml file
-PRODUCT_COPY_FILES += \
-    device/htc/speedy/prebuilt/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # OMX Config Profiles
 PRODUCT_COPY_FILES += \
@@ -154,9 +94,6 @@ PRODUCT_COPY_FILES += \
     device/htc/speedy/prebuilt/system/etc/vommcodec.cfg:system/etc/vommcodec.cfg \
     device/htc/speedy/prebuilt/system/etc/voPDLog.cfg:system/etc/voPDLog.cfg \
     device/htc/speedy/prebuilt/system/etc/voVidDec.dat:system/etc/voVidDec.dat
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 # speedy uses high-density artwork where available
 PRODUCT_LOCALES += en

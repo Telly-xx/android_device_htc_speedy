@@ -1,10 +1,11 @@
-import init.speedy.usb.rc
+import init.htc7x30.usb.rc
 
+on early-init
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    symlink /mnt/sdcard /sdcard
 
-on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
-
-on fs
+on early-fs
     mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
@@ -14,11 +15,6 @@ on fs
     mount ext4 /dev/block/mmcblk0p27 /data wait noatime nodiratime nosuid nodev barrier=0 noauto_da_alloc nouser_xattr
     mount ext4 /dev/block/mmcblk0p28 /cache wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
     mount ext4 /dev/block/mmcblk0p31 /devlog wait noatime nodiratime nosuid nodev barrier=0 nouser_xattr
-
-    export EXTERNAL_STORAGE /mnt/sdcard
-    mkdir /mnt/sdcard 0000 system system
-    # for backwards compatibility
-    symlink /mnt/sdcard /sdcard
 
     #wifi
     mkdir /data/misc 1771 system misc
