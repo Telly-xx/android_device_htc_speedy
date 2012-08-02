@@ -137,9 +137,6 @@ $(call inherit-product, device/htc/speedy/media_a1026.mk)
 # htc audio settings
 $(call inherit-product, device/htc/speedy/media_htcaudio.mk)
 
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
-
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 PRODUCT_NAME := htc_speedy
