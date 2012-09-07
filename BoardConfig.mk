@@ -66,6 +66,7 @@ BOARD_FLASH_BLOCK_SIZE := 262144
 
 TARGET_KERNEL_SOURCE := kernel/htc/msm7x30
 TARGET_KERNEL_CONFIG := evervolv_speedy_defconfig
+BUILD_KERNEL := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/common
 TARGET_PREBUILT_KERNEL := device/htc/speedy/prebuilt/root/kernel
