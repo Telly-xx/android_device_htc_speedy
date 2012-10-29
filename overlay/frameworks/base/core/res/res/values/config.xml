@@ -110,6 +110,16 @@
     <!-- Default blink frequency for notification LED is 9 seconds. -->
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
+    <!-- The number of degrees to rotate the display when the keyboard is open.
+         A value of -1 means no change in orientation by default. -->
+    <integer name="config_lidOpenRotation">90</integer>
+
+    <!-- Indicate whether the lid state impacts the accessibility of
+         the physical keyboard.  0 means it doesn't, 1 means it is accessible
+         when the lid is open, 2 means it is accessible when the lid is
+         closed.  The default is 0. -->
+    <integer name="config_lidKeyboardAccessibility">1</integer>
+
     <!-- Package name providing network location support. -->
     <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
 
@@ -174,10 +184,13 @@
     <bool name="config_unplugTurnsOnScreen">true</bool>
     
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
-    <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
+    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
 
     <!-- Boolean indicating whether the wifi chipset has background scan support -->
     <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+
+    <!-- Boolean indicating if current platform supports quick switch-on/off of Bluetooth Module -->
+    <bool name="config_bluetooth_adapter_quick_switch">false</bool>
 
     <bool name="config_ui_enableFadingMarquee">false</bool>
     
