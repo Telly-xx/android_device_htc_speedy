@@ -110,6 +110,20 @@ key F {
     alt:                                ')'
 }
 
+key G {
+    label: 'G'
+    base: 'g'
+    shift: 'G'
+    alt: '/'
+}
+
+key H {
+    label: 'H'
+    base: 'h'
+    shift: 'H'
+    alt: '%'
+}
+
 key J {
     label:                              'J'
     base:                               'j'
