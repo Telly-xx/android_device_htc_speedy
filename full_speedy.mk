@@ -46,8 +46,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml
 
 # CameraHal
-#PRODUCT_PACKAGES += \
-#    camera.msm7x30
+PRODUCT_PACKAGES += \
+    camera.msm7x30
 
 # Misc
 PRODUCT_PACKAGES += \
